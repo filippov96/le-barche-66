@@ -1053,10 +1053,11 @@ a { color: inherit; text-decoration: none; }
   grid-template-columns: 37fr 32fr 31fr;
   grid-template-rows: repeat(6, 1fr);
   grid-auto-rows: unset;
-  gap: 4px;
+  gap: var(--sp-4);
   aspect-ratio: 1312 / 564;
 }
 .exp-card::after { content: none; }
+.exp-card { border-radius: var(--r-lg); }
 .exp-card-venezia  { grid-column: 1; grid-row: 1 / 7; }
 .exp-card-burano   { grid-column: 2; grid-row: 1 / 4; }
 .exp-card-verona   { grid-column: 2; grid-row: 4 / 7; }
