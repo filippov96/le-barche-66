@@ -71,8 +71,7 @@ const Apartments = ({ t }) => {
               <div className="apt-photo-wrap">
                 <img src={APT_PHOTOS[i]} alt={name} className="apt-photo-img" />
                 <div className="apt-photo-bar">
-                  <span className="apt-tag"><Icon name="users" size={13}/>{capacity}</span>
-                  <span className="apt-tag"><Icon name="ruler" size={13}/>{size}</span>
+                  <span className="apt-tag"><Icon name="users" size={13}/>{capacity}<span className="apt-tag-sep">·</span><Icon name="ruler" size={13}/>{size}</span>
                   <a href="#booking" className="btn btn-primary apt-book-btn">{t.nav.book}</a>
                 </div>
               </div>
