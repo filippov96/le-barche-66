@@ -1057,7 +1057,7 @@ a { color: inherit; text-decoration: none; }
   aspect-ratio: 1312 / 564;
 }
 .exp-card::after { content: none; }
-.exp-card { border-radius: var(--r-lg); }
+.exp-card { border-radius: var(--r-md); }
 .exp-card-venezia  { grid-column: 1; grid-row: 1 / 7; }
 .exp-card-burano   { grid-column: 2; grid-row: 1 / 4; }
 .exp-card-verona   { grid-column: 2; grid-row: 4 / 7; }
@@ -1068,7 +1068,7 @@ a { color: inherit; text-decoration: none; }
 .exp-card {
   position: relative;
   overflow: hidden;
-  border-radius: var(--r-lg);
+  border-radius: var(--r-md);
   background: var(--lagoon-deep);
 }
 .exp-card-img {
@@ -1132,7 +1132,7 @@ a { color: inherit; text-decoration: none; }
     aspect-ratio: auto;
     gap: var(--sp-4);
   }
-  .exp-card { border-radius: var(--r-lg); }
+  .exp-card { border-radius: var(--r-md); }
   .exp-card-venezia  { grid-column: 1 / 3; grid-row: auto; aspect-ratio: 16 / 7; }
   .exp-card-burano, .exp-card-verona,
   .exp-card-padova, .exp-card-dolomiti,
