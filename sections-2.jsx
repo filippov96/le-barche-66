@@ -34,40 +34,66 @@ const APT_PHOTOS = [
   "photos/apt-3c-2.jpg",
 ];
 
-const Apartments = ({ t }) => (
-  <section className="section" id="apartments" data-screen-label="04 Apartments">
-    <div className="wrap">
-      <div className="apartments-head">
-        <div>
-          <span className="eyebrow">{t.apartments.eyebrow}</span>
-          <h2 className="h2" style={{marginTop: 16}}>{t.apartments.title}</h2>
+const Apartments = ({ t }) => {
+  const [hovered, setHovered] = React.useState(null);
+  const [mouse, setMouse] = React.useState({ x: 0, y: 0 });
+
+  React.useEffect(() => {
+    const onMove = (e) => setMouse({ x: e.clientX, y: e.clientY });
+    window.addEventListener('mousemove', onMove);
+    return () => window.removeEventListener('mousemove', onMove);
+  }, []);
+
+  return (
+    <section className="section" id="apartments" data-screen-label="04 Apartments">
+      <div className="wrap">
+        <div className="apartments-head">
+          <div>
+            <span className="eyebrow">{t.apartments.eyebrow}</span>
+            <h2 className="h2" style={{marginTop: 16}}>{t.apartments.title}</h2>
+          </div>
+          <p className="lede">{t.apartments.sub}</p>
         </div>
-        <p className="lede">{t.apartments.sub}</p>
-      </div>
-      <div className="apt-list">
-        {t.apartments.list.map(([num, name, desc, capacity, size], i) => (
-          <div key={i} className="apt-row">
-            <div className="apt-row-info">
+        <div className="apt-list">
+          {t.apartments.list.map(([num, name, desc, capacity, size], i) => (
+            <div key={i} className="apt-row"
+                 onMouseEnter={() => setHovered(i)}
+                 onMouseLeave={() => setHovered(null)}>
+              <div className="apt-num">{num}</div>
               <div className="apt-name-block">
                 <div className="apt-num-label">Apt {num}</div>
                 <div className="apt-name">{name}</div>
               </div>
               <div className="apt-desc">{desc}</div>
-            </div>
-            <div className="apt-photo-wrap">
-              <img src={APT_PHOTOS[i]} alt={name} className="apt-photo-img" />
-              <div className="apt-photo-bar">
-                <span className="apt-tag"><Icon name="users" size={13}/>{capacity}</span>
-                <span className="apt-tag"><Icon name="ruler" size={13}/>{size}</span>
-                <a href="#booking" className="btn btn-primary apt-book-btn">{t.nav.book}</a>
+              <div className="apt-meta apt-meta-1"><Icon name="users" size={14}/><span><strong>{capacity}</strong></span></div>
+              <div className="apt-meta apt-meta-2"><Icon name="ruler" size={14}/><span><strong>{size}</strong></span></div>
+              <a href="#booking" className="apt-cta"><Icon name="arrow-up-right" size={16}/></a>
+              <div className="apt-photo-wrap">
+                <img src={APT_PHOTOS[i]} alt={name} className="apt-photo-img" />
+                <div className="apt-photo-bar">
+                  <span className="apt-tag"><Icon name="users" size={13}/>{capacity}</span>
+                  <span className="apt-tag"><Icon name="ruler" size={13}/>{size}</span>
+                  <a href="#booking" className="btn btn-primary apt-book-btn">{t.nav.book}</a>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
-    </div>
-  </section>
-);
+      <div className={"apt-hover-preview" + (hovered !== null ? " visible" : "")}
+           style={{ left: mouse.x, top: mouse.y }}>
+        {hovered !== null && (
+          <>
+            <img src={APT_PHOTOS[hovered]} alt={t.apartments.list[hovered][1]}/>
+            <div className="apt-preview-tag">
+              {t.apartments.list[hovered][0]} · {t.apartments.list[hovered][4]}
+            </div>
+          </>
+        )}
+      </div>
+    </section>
+  );
+};
 
 // ============ LOCATION ============
 const Location = ({ t }) => (
