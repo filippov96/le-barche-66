@@ -73,7 +73,7 @@ const Reviews = ({ t }) => (
         ))}
       </div>
       {t.reviews.reviews.length > 3 && (
-        <div className="reviews-list" style={{marginTop: 'var(--sp-5)', gridTemplateColumns: 'repeat(2, 1fr)'}}>
+        <div className="reviews-list reviews-list-2col" style={{marginTop: 'var(--sp-5)'}}>
           {t.reviews.reviews.slice(3).map(([text, name, where, platform, plabel], i) => (
             <ReviewCard key={i} text={text} name={name} where={where} platform={platform} platformLabel={plabel}/>
           ))}
