@@ -1068,7 +1068,7 @@ a { color: inherit; text-decoration: none; }
 .exp-card {
   position: relative;
   overflow: hidden;
-  border-radius: var(--r-sm);
+  border-radius: var(--r-lg);
   background: var(--lagoon-deep);
 }
 .exp-card-img {
