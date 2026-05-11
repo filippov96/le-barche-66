@@ -3,13 +3,13 @@ import type { T } from '../i18n/index';
 import Icon from './Icon.astro';
 interface Props { t: T; }
 const { t } = Astro.props;
-const BASE = import.meta.env.BASE_URL;
+const BASE = import.meta.env.BASE_URL.replace(/\/$/, '');
 const APT_PHOTOS = [
-  `${BASE}photos/apt-3-4.jpg`,
-  `${BASE}photos/apt-3a-2.jpg`,
-  `${BASE}photos/apt-3b-2.jpg`,
-  `${BASE}photos/apt-3c-2.jpg`,
-  `${BASE}photos/apt-3c-2.jpg`,
+  `${BASE}/photos/apt-3-4.jpg`,
+  `${BASE}/photos/apt-3a-2.jpg`,
+  `${BASE}/photos/apt-3b-2.jpg`,
+  `${BASE}/photos/apt-3c-2.jpg`,
+  `${BASE}/photos/apt-3c-2.jpg`,
 ];
 ---
 <section class="section" id="apartments" data-screen-label="04 Apartments">

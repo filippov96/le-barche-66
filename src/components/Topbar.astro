@@ -24,7 +24,7 @@ const langUrls: Record<Locale, string> = {
   <div class="topbar-right">
     <div class="lang-switch" role="tablist" aria-label="Language">
       {(['it','en','de'] as Locale[]).map(L => (
-        <a href={langUrls[L]} class={lang === L ? 'active' : ''} role="tab">{L.toUpperCase()}</a>
+        <button class={lang === L ? 'active' : ''} onclick={`window.location.href='${langUrls[L]}'`} role="tab">{L.toUpperCase()}</button>
       ))}
     </div>
     <a href="#booking" class="btn btn-primary">{t.nav.book}</a>
