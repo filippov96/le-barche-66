@@ -1,0 +1,31 @@
+---
+import type { T } from '../i18n/index';
+interface Props { t: T; }
+const { t } = Astro.props;
+const BASE = import.meta.env.BASE_URL;
+---
+<section class="section" id="intro" data-screen-label="02 Intro">
+  <div class="wrap">
+    <div class="intro-grid">
+      <div class="intro-text">
+        <span class="eyebrow">{t.intro.eyebrow}</span>
+        <h2 class="h2 intro-title">
+          {t.intro.title_a} <em class="italic" style="font-weight:300;color:var(--terracotta)">{t.intro.title_b}</em>
+        </h2>
+        <p class="lede intro-body">{t.intro.body}</p>
+        <div class="intro-stats">
+          <div><div class="intro-stat-num">{t.intro.stat1_n}</div><div class="intro-stat-label">{t.intro.stat1_l}</div></div>
+          <div><div class="intro-stat-num">{t.intro.stat2_n}</div><div class="intro-stat-label">{t.intro.stat2_l}</div></div>
+          <div><div class="intro-stat-num">{t.intro.stat3_n}</div><div class="intro-stat-label">{t.intro.stat3_l}</div></div>
+        </div>
+      </div>
+      <div class="intro-image">
+        <img src={`${BASE}photos/apt-3-4.jpg`} alt="Appartamento Le Barche 66" />
+        <div class="intro-image-tag">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 7-8 13-8 13s-8-6-8-13a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+          {t.intro.tag}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

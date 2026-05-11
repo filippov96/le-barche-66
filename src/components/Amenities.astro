@@ -1,0 +1,26 @@
+---
+import type { T } from '../i18n/index';
+import Icon from './Icon.astro';
+interface Props { t: T; }
+const { t } = Astro.props;
+---
+<section class="section amenities" id="amenities" data-screen-label="03 Amenities">
+  <div class="wrap">
+    <div class="amenities-head">
+      <div>
+        <span class="eyebrow">{t.amenities.eyebrow}</span>
+        <h2 class="h2" style="margin-top:16px">{t.amenities.title}</h2>
+      </div>
+      <p class="lede" style="max-width:460px">{t.amenities.sub}</p>
+    </div>
+    <div class="amenities-grid">
+      {t.amenities.items.map(([title, desc, iconName, featured]) => (
+        <div class={`amenity${featured ? ' featured' : ''}`}>
+          <div class="amenity-icon"><Icon name={iconName} size={32} stroke={1.4} /></div>
+          <div class="amenity-title">{title}</div>
+          <div class="amenity-desc">{desc}</div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

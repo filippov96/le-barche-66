@@ -1,0 +1,38 @@
+---
+import type { T } from '../i18n/index';
+interface Props { t: T; }
+const { t } = Astro.props;
+
+const EXP_PHOTOS: Record<string, string> = {
+  venezia:  "https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?w=840&q=80&auto=format&fit=crop",
+  burano:   "https://images.unsplash.com/photo-1596654907146-e3f04b1561cc?w=840&q=80&auto=format&fit=crop",
+  verona:   "https://images.unsplash.com/photo-1598868759776-113397b9d19b?w=840&q=80&auto=format&fit=crop",
+  padova:   "https://images.unsplash.com/photo-1588447824384-2b5b65080fd0?w=840&q=80&auto=format&fit=crop",
+  dolomiti: "https://images.unsplash.com/photo-1557064349-7b3817527fb8?w=840&q=80&auto=format&fit=crop",
+  prosecco: "https://images.unsplash.com/photo-1502285254372-2cb4d1b0993b?w=840&q=80&auto=format&fit=crop",
+};
+const kinds = ["venezia","burano","verona","padova","dolomiti","prosecco"];
+const modes = ["Bus / Treno","Bus + vaporetto","Treno","Treno","Auto","Auto"];
+---
+<section class="section experience-section" id="experience" data-screen-label="06 Experience">
+  <div class="wrap">
+    <div class="exp-head">
+      <span class="eyebrow">{t.experience.eyebrow}</span>
+      <h2 class="h2" style="margin-top:16px;text-wrap:balance">{t.experience.title}</h2>
+      <p class="lede" style="margin-top:24px;max-width:540px">{t.experience.sub}</p>
+    </div>
+    <div class="exp-grid">
+      {t.experience.cards.map(([name, desc, distance], i) => (
+        <article class={`exp-card exp-card-${kinds[i]}`}>
+          <img src={EXP_PHOTOS[kinds[i]]} alt={name} loading="lazy" class="exp-card-img" />
+          <div class="exp-card-overlay"></div>
+          <div class="exp-card-content">
+            <p class="exp-card-meta">{distance} · {modes[i]}</p>
+            <h3 class="exp-card-title">{name}</h3>
+            <p class="exp-card-desc">{desc}</p>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

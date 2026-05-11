@@ -1,0 +1,42 @@
+---
+import type { T } from '../i18n/index';
+interface Props { t: T; }
+const { t } = Astro.props;
+---
+<section class="hero" id="top" data-screen-label="01 Hero">
+  <div class="hero-bg">
+    <img src="https://images.unsplash.com/photo-1514890547357-a9ee288728e0?w=2400&q=85" alt="Venice rooftops at golden hour" />
+  </div>
+  <div class="hero-content">
+    <div class="hero-inner">
+      <div>
+        <div class="hero-eyebrow">{t.hero.eyebrow}</div>
+        <h1 class="hero-headline">
+          {t.hero.headline_a}<br/>
+          <span class="accent italic">{t.hero.headline_b}</span><br/>
+          {t.hero.headline_c}
+        </h1>
+        <p class="hero-sub" style="margin-top:24px">{t.hero.sub}</p>
+        <div class="hero-meta">
+          <a href="#booking" class="btn btn-primary btn-arrow">
+            {t.hero.check_dates}
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </a>
+          <a href="#apartments" class="btn" style="color:var(--paper);font-weight:400">
+            {t.hero.see_apartments}
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="hero-side">
+        <div class="hero-rating">
+          <div class="hero-rating-row">
+            <span class="hero-rating-score">9.6</span>
+            <span class="hero-rating-stars">★★★★★</span>
+          </div>
+          <div class="hero-rating-label">{t.hero.rating_label}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

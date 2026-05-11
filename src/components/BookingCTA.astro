@@ -1,0 +1,33 @@
+---
+import type { T } from '../i18n/index';
+interface Props { t: T; }
+const { t } = Astro.props;
+---
+<section class="booking-cta" id="booking" data-screen-label="08 Booking">
+  <div class="wrap">
+    <div class="booking-inner">
+      <div>
+        <h2 class="h2">
+          {t.booking.title_a} <em class="italic" style="font-weight:300">{t.booking.title_b}</em>
+        </h2>
+        <p class="lede booking-cta-sub">{t.booking.sub}</p>
+      </div>
+      <div class="booking-buttons">
+        <a class="booking-btn" href="https://www.booking.com/hotel/it/le-barche66-venice-apartments.it.html?label=gen173rf-10CAEoggI46AdIM1gDaHGIAQGYATO4AQfIAQzYAQPoAQH4AQGIAgGiAhIxOTIuMTY4LjAuMjEzOjMwMDCoAgG4AuOS8s8GwAIB0gIkY2JiODE3MGEtZDJkYi00MThlLWE0NjYtNDMyMTI2ODA4MzE02AIB4AIB&aid=304142" target="_blank" rel="noopener">
+          <div class="platform-logo pl-booking">B.</div>
+          <div class="booking-btn-stack">
+            <span>{t.booking.booking_label} <strong>Booking.com</strong></span>
+            <small>{t.booking.booking_sub}</small>
+          </div>
+        </a>
+        <a class="booking-btn" href="https://www.airbnb.it/rooms/1135630967783011691?source_impression_id=p3_1778158019_P31csX1oCmesVK7e" target="_blank" rel="noopener">
+          <div class="platform-logo pl-airbnb">A</div>
+          <div class="booking-btn-stack">
+            <span>{t.booking.airbnb_label} <strong>Airbnb</strong></span>
+            <small>{t.booking.airbnb_sub}</small>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

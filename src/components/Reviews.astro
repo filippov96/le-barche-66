@@ -1,0 +1,66 @@
+---
+import type { T } from '../i18n/index';
+interface Props { t: T; }
+const { t } = Astro.props;
+---
+<section class="section reviews" id="reviews" data-screen-label="07 Reviews">
+  <div class="wrap">
+    <div class="reviews-head">
+      <span class="eyebrow">{t.reviews.eyebrow}</span>
+      <h2 class="h2" style="margin-top:16px">{t.reviews.title}</h2>
+      <p class="lede" style="margin-top:16px">{t.reviews.sub}</p>
+      <div class="review-platforms">
+        <div class="platform-card">
+          <div class="platform-score">9.6</div>
+          <div class="platform-meta">
+            <div class="platform-name">Booking.com</div>
+            <div class="platform-stars">★★★★★</div>
+            <div class="platform-count">{t.reviews.booking_count}</div>
+          </div>
+        </div>
+        <div class="platform-card">
+          <div class="platform-score">4.99</div>
+          <div class="platform-meta">
+            <div class="platform-name">Airbnb</div>
+            <div class="platform-stars">★★★★★</div>
+            <div class="platform-count">{t.reviews.airbnb_count}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="reviews-list">
+      {t.reviews.reviews.slice(0, 3).map(([text, name, where, platform, plabel]) => (
+        <div class="review">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">{text}</div>
+          <div class="review-author">
+            <div class="review-avatar">{name.charAt(0)}</div>
+            <div class="review-meta">
+              <div class="review-name">{name}</div>
+              <div class="review-where">{where}</div>
+            </div>
+            <div class={`review-platform-tag ${platform}`}>{plabel}</div>
+          </div>
+        </div>
+      ))}
+    </div>
+    {t.reviews.reviews.length > 3 && (
+      <div class="reviews-list reviews-list-2col" style="margin-top:var(--sp-5)">
+        {t.reviews.reviews.slice(3).map(([text, name, where, platform, plabel]) => (
+          <div class="review">
+            <div class="review-stars">★★★★★</div>
+            <div class="review-text">{text}</div>
+            <div class="review-author">
+              <div class="review-avatar">{name.charAt(0)}</div>
+              <div class="review-meta">
+                <div class="review-name">{name}</div>
+                <div class="review-where">{where}</div>
+              </div>
+              <div class={`review-platform-tag ${platform}`}>{plabel}</div>
+            </div>
+          </div>
+        ))}
+      </div>
+    )}
+  </div>
+</section>

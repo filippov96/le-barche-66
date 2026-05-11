@@ -1,0 +1,67 @@
+---
+import type { T } from '../i18n/index';
+interface Props { t: T; }
+const { t } = Astro.props;
+---
+<section class="section location" id="location" data-screen-label="05 Location">
+  <div class="wrap">
+    <div class="location-grid">
+      <div class="location-text">
+        <span class="eyebrow">{t.location.eyebrow}</span>
+        <h2 class="h2" style="margin-top:16px">
+          {t.location.title_a} <em class="italic" style="font-weight:300;color:var(--terracotta)">{t.location.title_b}</em>
+        </h2>
+        <p class="lede" style="margin-top:24px">{t.location.sub}</p>
+        <ul class="location-points">
+          {t.location.points.map(([time, mode, place]) => (
+            <li>
+              <span class="pt-time">{time}</span>
+              <span>{place}</span>
+              <span class="pt-mode">{mode}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div class="map-wrap">
+        <div id="leaflet-map" style="width:100%;height:100%;min-height:460px"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script define:vars={{ pinVenice: t.location.pin_venice, pinAirport: t.location.pin_airport }}>
+  function initMap() {
+    const L = window.L;
+    if (!L) return;
+    const mapEl = document.getElementById('leaflet-map');
+    if (!mapEl || mapEl._leaflet_id) return;
+
+    const us = [45.4906, 12.2436];
+    const map = L.map(mapEl, { center: us, zoom: 13, scrollWheelZoom: false });
+
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>',
+      maxZoom: 19, subdomains: 'abcd',
+    }).addTo(map);
+
+    const makeIcon = (label, isUs) => L.divIcon({
+      className: `leaflet-custom-pin${isUs ? ' us' : ''}`,
+      html: `<div class="pin-inner"><div class="pin-label">${label}</div><div class="pin-dot"></div></div>`,
+      iconSize: [120, 50], iconAnchor: [60, 50],
+    });
+
+    L.marker(us, { icon: makeIcon('Le Barche 66', true) }).addTo(map)
+      .bindPopup('<strong>Le Barche 66</strong><br>Piazza XXVII Ottobre 66<br>30172 Mestre, Italia');
+    L.marker([45.4341, 12.3388], { icon: makeIcon(pinVenice, false) }).addTo(map);
+    L.marker([45.5053, 12.3519], { icon: makeIcon(pinAirport, false) }).addTo(map);
+
+    const bounds = L.latLngBounds([us, [45.4341, 12.3388], [45.5053, 12.3519]]);
+    map.fitBounds(bounds, { padding: [60, 60] });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initMap);
+  } else {
+    initMap();
+  }
+</script>

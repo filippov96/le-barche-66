@@ -1,0 +1,88 @@
+---
+import type { T } from '../i18n/index';
+import Icon from './Icon.astro';
+interface Props { t: T; }
+const { t } = Astro.props;
+const BASE = import.meta.env.BASE_URL;
+const APT_PHOTOS = [
+  `${BASE}photos/apt-3-4.jpg`,
+  `${BASE}photos/apt-3a-2.jpg`,
+  `${BASE}photos/apt-3b-2.jpg`,
+  `${BASE}photos/apt-3c-2.jpg`,
+  `${BASE}photos/apt-3c-2.jpg`,
+];
+---
+<section class="section" id="apartments" data-screen-label="04 Apartments">
+  <div class="wrap">
+    <div class="apartments-head">
+      <div>
+        <span class="eyebrow">{t.apartments.eyebrow}</span>
+        <h2 class="h2" style="margin-top:16px">{t.apartments.title}</h2>
+      </div>
+      <p class="lede">{t.apartments.sub}</p>
+    </div>
+    <div class="apt-list">
+      {t.apartments.list.map(([num, name, desc, capacity, size], i) => (
+        <div class="apt-row" data-index={i}>
+          <div class="apt-num">{num}</div>
+          <div class="apt-name-block">
+            <div class="apt-num-label">Apt {num}</div>
+            <div class="apt-name">{name}</div>
+          </div>
+          <div class="apt-desc">{desc}</div>
+          <div class="apt-meta apt-meta-1"><Icon name="users" size={14}/><span><strong>{capacity}</strong></span></div>
+          <div class="apt-meta apt-meta-2"><Icon name="ruler" size={14}/><span><strong>{size}</strong></span></div>
+          <a href="#booking" class="apt-cta"><Icon name="arrow-up-right" size={16}/></a>
+          <!-- Mobile photo -->
+          <div class="apt-photo-wrap">
+            <img src={APT_PHOTOS[i]} alt={name} class="apt-photo-img" />
+            <div class="apt-photo-bar">
+              <span class="apt-tag">
+                <Icon name="users" size={13}/>{capacity}<span class="apt-tag-sep">·</span><Icon name="ruler" size={13}/>{size}
+              </span>
+              <a href="#booking" class="btn btn-primary apt-book-btn">{t.nav.book}</a>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+  <!-- Desktop hover preview -->
+  <div class="apt-hover-preview" id="apt-hover-preview">
+    <img id="apt-preview-img" src="" alt="" />
+    <div class="apt-preview-tag" id="apt-preview-tag"></div>
+  </div>
+</section>
+
+<script>
+  const preview = document.getElementById('apt-hover-preview') as HTMLElement;
+  const previewImg = document.getElementById('apt-preview-img') as HTMLImageElement;
+  const previewTag = document.getElementById('apt-preview-tag') as HTMLElement;
+
+  const photos = preview?.closest('section')?.querySelectorAll('.apt-row');
+
+  document.addEventListener('mousemove', (e) => {
+    if (preview) {
+      preview.style.left = e.clientX + 'px';
+      preview.style.top = e.clientY + 'px';
+    }
+  });
+
+  photos?.forEach((row) => {
+    const img = row.querySelector('.apt-photo-img') as HTMLImageElement;
+    const num = row.querySelector('.apt-num')?.textContent || '';
+    const size = row.querySelector('.apt-meta-2 strong')?.textContent || '';
+
+    row.addEventListener('mouseenter', () => {
+      if (img && previewImg) {
+        previewImg.src = img.src;
+        previewImg.alt = img.alt;
+      }
+      if (previewTag) previewTag.textContent = `${num} · ${size}`;
+      preview?.classList.add('visible');
+    });
+    row.addEventListener('mouseleave', () => {
+      preview?.classList.remove('visible');
+    });
+  });
+</script>

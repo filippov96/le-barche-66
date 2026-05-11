@@ -1,0 +1,45 @@
+---
+import type { T } from '../i18n/index';
+interface Props { t: T; }
+const { t } = Astro.props;
+---
+<footer class="footer" data-screen-label="09 Footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo">Le Barche <em class="italic" style="font-weight:300;opacity:0.7">66</em></div>
+        <p class="footer-tagline">{t.footer.tagline}</p>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">{t.footer.col_visit}</div>
+        <ul>
+          <li><a href="#apartments">{t.footer.links_visit[0]}</a></li>
+          <li><a href="#location">{t.footer.links_visit[1]}</a></li>
+          <li><a href="#experience">{t.footer.links_visit[2]}</a></li>
+          <li><a href="#reviews">{t.footer.links_visit[3]}</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">{t.footer.col_stay}</div>
+        <ul>
+          {t.footer.links_stay.map(l => <li><a href="#booking">{l}</a></li>)}
+        </ul>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">{t.footer.col_contact}</div>
+        <ul>
+          <li style="white-space:pre-line;color:rgba(245,241,234,0.7);font-size:14px">{t.footer.address}</li>
+          <li><a href={`tel:${t.footer.phone.replace(/\s/g, '')}`}>{t.footer.phone}</a></li>
+          <li><a href={`mailto:${t.footer.email}`}>{t.footer.email}</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>{t.footer.rights}</span>
+      <div style="display:flex;gap:24px">
+        <a href="#">{t.footer.privacy}</a>
+        <a href="#">{t.footer.terms}</a>
+      </div>
+    </div>
+  </div>
+</footer>

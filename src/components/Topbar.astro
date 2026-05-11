@@ -1,0 +1,39 @@
+---
+import type { T } from '../i18n/index';
+import type { Locale } from '../i18n/index';
+
+interface Props { t: T; lang: Locale; }
+const { t, lang } = Astro.props;
+const BASE = import.meta.env.BASE_URL;
+const langUrls: Record<Locale, string> = {
+  it: BASE,
+  en: `${BASE}en/`,
+  de: `${BASE}de/`,
+};
+---
+<header class="topbar" id="topbar">
+  <a href="#top" class="topbar-logo">
+    Le Barche <em style="font-style:italic; opacity:0.7">66</em>
+  </a>
+  <nav class="topbar-nav">
+    <a href="#apartments">{t.nav.apartments}</a>
+    <a href="#location">{t.nav.location}</a>
+    <a href="#experience">{t.nav.experience}</a>
+    <a href="#reviews">{t.nav.reviews}</a>
+  </nav>
+  <div class="topbar-right">
+    <div class="lang-switch" role="tablist" aria-label="Language">
+      {(['it','en','de'] as Locale[]).map(L => (
+        <a href={langUrls[L]} class={lang === L ? 'active' : ''} role="tab">{L.toUpperCase()}</a>
+      ))}
+    </div>
+    <a href="#booking" class="btn btn-primary">{t.nav.book}</a>
+  </div>
+</header>
+
+<script>
+  const header = document.getElementById('topbar');
+  const onScroll = () => header?.classList.toggle('scrolled', window.scrollY > 40);
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+</script>
