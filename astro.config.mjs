@@ -7,4 +7,19 @@ export default defineConfig({
   site: SITE,
   base: BASE,
   output: 'static',
+  compressHTML: true,
+  build: {
+    inlineStylesheets: 'auto',
+  },
+  vite: {
+    build: {
+      cssMinify: true,
+      minify: 'esbuild',
+      rollupOptions: {
+        output: {
+          manualChunks: undefined,
+        },
+      },
+    },
+  },
 });

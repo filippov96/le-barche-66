@@ -20,7 +20,10 @@ const BASE = import.meta.env.BASE_URL.replace(/\/$/, '');
         </div>
       </div>
       <div class="intro-image">
-        <img src={`${BASE}/photos/apt-3-4.jpg`} alt="Appartamento Le Barche 66" />
+        <picture>
+          <source srcset={`${BASE}/photos/apt-3-4.avif`} type="image/avif" />
+          <img src={`${BASE}/photos/apt-3-4.jpg`} alt="Appartamento Le Barche 66" loading="lazy" decoding="async" />
+        </picture>
         <div class="intro-image-tag">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 7-8 13-8 13s-8-6-8-13a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
           {t.intro.tag}

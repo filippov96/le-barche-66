@@ -5,11 +5,11 @@ interface Props { t: T; }
 const { t } = Astro.props;
 const BASE = import.meta.env.BASE_URL.replace(/\/$/, '');
 const APT_PHOTOS = [
-  `${BASE}/photos/apt-3-4.jpg`,
-  `${BASE}/photos/apt-3a-2.jpg`,
-  `${BASE}/photos/apt-3b-2.jpg`,
-  `${BASE}/photos/apt-3c-2.jpg`,
-  `${BASE}/photos/apt-3c-2.jpg`,
+  { avif: `${BASE}/photos/apt-3-4.avif`,  jpg: `${BASE}/photos/apt-3-4.jpg`  },
+  { avif: `${BASE}/photos/apt-3a-2.avif`, jpg: `${BASE}/photos/apt-3a-2.jpg` },
+  { avif: `${BASE}/photos/apt-3b-2.avif`, jpg: `${BASE}/photos/apt-3b-2.jpg` },
+  { avif: `${BASE}/photos/apt-3c-2.avif`, jpg: `${BASE}/photos/apt-3c-2.jpg` },
+  { avif: `${BASE}/photos/apt-3c-2.avif`, jpg: `${BASE}/photos/apt-3c-2.jpg` },
 ];
 ---
 <section class="section" id="apartments" data-screen-label="04 Apartments">
@@ -35,7 +35,10 @@ const APT_PHOTOS = [
           <a href="#booking" class="apt-cta"><Icon name="arrow-up-right" size={16}/></a>
           <!-- Mobile photo -->
           <div class="apt-photo-wrap">
-            <img src={APT_PHOTOS[i]} alt={name} class="apt-photo-img" />
+            <picture>
+              <source srcset={APT_PHOTOS[i].avif} type="image/avif" />
+              <img src={APT_PHOTOS[i].jpg} alt={name} class="apt-photo-img" loading="lazy" decoding="async" />
+            </picture>
             <div class="apt-photo-bar">
               <span class="apt-tag">
                 <Icon name="users" size={13}/>{capacity}<span class="apt-tag-sep">·</span><Icon name="ruler" size={13}/>{size}
@@ -75,7 +78,8 @@ const APT_PHOTOS = [
 
     row.addEventListener('mouseenter', () => {
       if (img && previewImg) {
-        previewImg.src = img.src;
+        const avifSrc = img.closest('picture')?.querySelector('source[type="image/avif"]')?.getAttribute('srcset');
+        previewImg.src = avifSrc || img.src;
         previewImg.alt = img.alt;
       }
       if (previewTag) previewTag.textContent = `${num} · ${size}`;
