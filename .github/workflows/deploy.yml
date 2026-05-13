@@ -25,6 +25,9 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run build
+        env:
+          ASTRO_SITE: https://filippov96.github.io
+          ASTRO_BASE: /le-barche-66
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist/

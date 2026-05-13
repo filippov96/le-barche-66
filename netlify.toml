@@ -1,0 +1,7 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  ASTRO_SITE = "https://lebarche66.netlify.app"
+  ASTRO_BASE = ""
