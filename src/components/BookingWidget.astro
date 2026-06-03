@@ -36,11 +36,11 @@
   }
 </style>
 
-<!-- Global overrides for KrossBooking (jQuery-injected, no scoped attributes) -->
+<!-- Global overrides for KrossBooking (jQuery-injected, calendar appended to body) -->
 <style is:global>
-  /* ── Submit button — terracotta + rounded ── */
+  /* ── Form inline widget (inside #booking-widget) ── */
   #booking-widget .kb-btn-submit,
-  #booking-widget button[type="submit"].kb-btn {
+  #kb-widget-container .kb-btn-submit {
     background-color: var(--terracotta) !important;
     border-color: var(--terracotta) !important;
     color: var(--paper) !important;
@@ -48,97 +48,116 @@
     transition: background-color 180ms ease;
   }
   #booking-widget .kb-btn-submit:hover,
-  #booking-widget button[type="submit"].kb-btn:hover {
+  #kb-widget-container .kb-btn-submit:hover {
     background-color: var(--terracotta-deep) !important;
     border-color: var(--terracotta-deep) !important;
   }
-
-  /* ── Date display numbers / dashes ── */
+  /* Date dashes / guest count numbers */
   #booking-widget .kb-d,
-  #booking-widget .kb-qt {
+  #booking-widget .kb-qt,
+  #booking-widget .kb-qt-m {
     color: var(--terracotta) !important;
   }
 
-  /* ── Underline indicator under date inputs ── */
-  #booking-widget .kb-form-group.kb-date::before,
-  #booking-widget .kb-form-group.kb-date::after,
-  #booking-widget .kb-d1::after,
-  #booking-widget .kb-d2::after,
-  #booking-widget .kb-d1::before,
-  #booking-widget .kb-d2::before {
+  /* ──────────────────────────────────────────────────────────
+     #kb-widget-container — popup appended to <body>
+     ────────────────────────────────────────────────────────── */
+
+  /* Month label (e.g. "giu 2026") */
+  #kb-widget-container .daterangepicker th.month,
+  #kb-widget-container .KB-daterangepicker th.month {
+    color: var(--terracotta) !important;
+  }
+
+  /* Today */
+  #kb-widget-container .daterangepicker td.today,
+  #kb-widget-container .KB-daterangepicker td.today {
+    color: var(--terracotta) !important;
+    font-weight: 600;
+  }
+
+  /* Selected dates (start, end, single active) */
+  #kb-widget-container .daterangepicker td.active,
+  #kb-widget-container .daterangepicker td.active:hover,
+  #kb-widget-container .daterangepicker td.start-date,
+  #kb-widget-container .daterangepicker td.end-date,
+  #kb-widget-container .KB-daterangepicker td.active,
+  #kb-widget-container .KB-daterangepicker td.start-date,
+  #kb-widget-container .KB-daterangepicker td.end-date {
     background-color: var(--terracotta) !important;
     border-color: var(--terracotta) !important;
-  }
-
-  /* ── Calendar popup ── */
-  #booking-widget .kb-calendar,
-  #booking-widget [class*="calendar"],
-  #booking-widget .kb-mmmm,
-  #booking-widget .kb-ddd {
-    color: var(--terracotta) !important;
-  }
-
-  /* Selected day cells in calendar */
-  #booking-widget td.selected,
-  #booking-widget td.kb-selected,
-  #booking-widget td.range,
-  #booking-widget td.in-range,
-  #booking-widget td.kb-range,
-  #booking-widget td.start,
-  #booking-widget td.end,
-  #booking-widget td.kb-start,
-  #booking-widget td.kb-end,
-  #booking-widget td[class*="selected"],
-  #booking-widget td[class*="range"],
-  #booking-widget .ui-state-active,
-  #booking-widget .ui-state-highlight {
-    background-color: var(--terracotta) !important;
     color: var(--paper) !important;
-    border-color: var(--terracotta) !important;
   }
-  #booking-widget td.in-range:not(.start):not(.end),
-  #booking-widget td.kb-range:not(.kb-start):not(.kb-end) {
+
+  /* In-range days (between start and end) */
+  #kb-widget-container .daterangepicker td.in-range:not(.active):not(.start-date):not(.end-date),
+  #kb-widget-container .KB-daterangepicker td.in-range:not(.active):not(.start-date):not(.end-date) {
     background-color: rgba(184, 107, 74, 0.18) !important;
     color: var(--terracotta-deep) !important;
   }
 
-  /* Month label header (GIU 2026 style) — border boxes */
-  #booking-widget .kb-month-label,
-  #booking-widget [class*="month"],
-  #booking-widget thead th,
-  #booking-widget caption {
+  /* Hover on available days */
+  #kb-widget-container .daterangepicker td.available:hover,
+  #kb-widget-container .KB-daterangepicker td.available:hover {
+    background-color: rgba(184, 107, 74, 0.28) !important;
+    color: var(--terracotta-deep) !important;
+  }
+
+  /* Next/prev arrows */
+  #kb-widget-container .kb-next span,
+  #kb-widget-container .kb-prev span,
+  #kb-widget-container th.prev,
+  #kb-widget-container th.next {
     color: var(--terracotta) !important;
+  }
+  #kb-widget-container .kb-next span::before,
+  #kb-widget-container .kb-prev span::before,
+  #kb-widget-container th.prev::before,
+  #kb-widget-container th.next::before {
     border-color: var(--terracotta) !important;
   }
 
-  /* Bordered month/nav button */
-  #booking-widget .kb-calendar-nav,
-  #booking-widget [class*="nav"] button,
-  #booking-widget button[class*="prev"],
-  #booking-widget button[class*="next"] {
-    color: var(--terracotta) !important;
-    border-color: var(--terracotta) !important;
-  }
-
-  /* Any leftover red/orange brand colors → terracotta */
-  #booking-widget [style*="color: rgb(232"],
-  #booking-widget [style*="color:#e"],
-  #booking-widget [style*="background-color: rgb(232"],
-  #booking-widget [style*="background-color:#e"] {
-    color: var(--terracotta) !important;
+  /* Apply / Cancel buttons */
+  #kb-widget-container .applyBtn,
+  #kb-widget-container .btn-primary {
     background-color: var(--terracotta) !important;
+    border-color: var(--terracotta) !important;
+    color: var(--paper) !important;
+    border-radius: var(--r-md) !important;
+  }
+  #kb-widget-container .applyBtn:hover,
+  #kb-widget-container .btn-primary:hover {
+    background-color: var(--terracotta-deep) !important;
+    border-color: var(--terracotta-deep) !important;
+  }
+  #kb-widget-container .cancelBtn,
+  #kb-widget-container .btn-default {
+    color: var(--terracotta) !important;
+    border-color: var(--terracotta) !important;
+    background-color: transparent !important;
+    border-radius: var(--r-md) !important;
   }
 
-  /* Links + accents */
-  #booking-widget a,
-  #booking-widget .kb-link,
-  #booking-widget [class*="accent"] {
+  /* Reset / Done text actions */
+  #kb-widget-container .kb-reset,
+  #kb-widget-container .kb-btn-done,
+  #kb-widget-container .drp-selected {
     color: var(--terracotta) !important;
   }
-  #booking-widget input:focus,
-  #booking-widget select:focus,
-  #booking-widget button:focus-visible {
+
+  /* Guests popup +/- buttons */
+  #kb-widget-container .kb-btn-p {
+    color: var(--terracotta) !important;
     border-color: var(--terracotta) !important;
-    outline-color: var(--terracotta) !important;
+  }
+  #kb-widget-container .kb-qt-m {
+    color: var(--terracotta) !important;
+  }
+
+  /* Mobile full-screen submit button */
+  #kb-widget-container .kb-mobile-full-availability .kb-btn-submit {
+    background-color: var(--terracotta) !important;
+    border-color: var(--terracotta) !important;
+    border-radius: var(--r-md) !important;
   }
 </style>
