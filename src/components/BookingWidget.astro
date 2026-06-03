@@ -1,13 +1,65 @@
-<section class="booking-widget-section" id="booking-widget">
-  <div class="wrap">
+<div class="booking-widget-wrap" id="booking-widget">
+  <div class="booking-widget-inner">
     <div class="kross-container"></div>
   </div>
-</section>
+</div>
 
 <style>
-  .booking-widget-section {
-    padding-top: var(--sp-8);
-    padding-bottom: var(--sp-8);
-    background: var(--bg);
+  .booking-widget-wrap {
+    position: relative;
+    z-index: 10;
+    margin-top: -3rem;
+    padding: 0 var(--sp-6);
+    max-width: var(--maxw);
+    margin-left: auto;
+    margin-right: auto;
+    /* shift up into hero */
+    transform: translateY(0);
+  }
+
+  .booking-widget-inner {
+    background: var(--paper);
+    border-radius: var(--r-lg);
+    box-shadow: var(--shadow-lg);
+    overflow: hidden;
+  }
+
+  /* ── KrossBooking accent overrides ── */
+  .booking-widget-inner :global(.kross-btn),
+  .booking-widget-inner :global([class*="kross-btn"]),
+  .booking-widget-inner :global(button[type="submit"]),
+  .booking-widget-inner :global(.btn-primary),
+  .booking-widget-inner :global([class*="primary"]) {
+    background-color: var(--terracotta) !important;
+    border-color: var(--terracotta) !important;
+  }
+  .booking-widget-inner :global(.kross-btn:hover),
+  .booking-widget-inner :global(button[type="submit"]:hover) {
+    background-color: var(--terracotta-deep) !important;
+    border-color: var(--terracotta-deep) !important;
+  }
+  .booking-widget-inner :global(a),
+  .booking-widget-inner :global([class*="accent"]),
+  .booking-widget-inner :global([class*="link"]) {
+    color: var(--terracotta) !important;
+  }
+  /* input focus ring */
+  .booking-widget-inner :global(input:focus),
+  .booking-widget-inner :global(select:focus) {
+    border-color: var(--terracotta) !important;
+    outline-color: var(--terracotta) !important;
+  }
+
+  /* ── Mobile: no overlap, full width ── */
+  @media (max-width: 768px) {
+    .booking-widget-wrap {
+      margin-top: 0;
+      padding: 0;
+      max-width: 100%;
+    }
+    .booking-widget-inner {
+      border-radius: 0;
+      box-shadow: var(--shadow-md);
+    }
   }
 </style>
