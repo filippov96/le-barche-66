@@ -9,6 +9,7 @@ import Location from '../components/Location.astro';
 import Experience from '../components/Experience.astro';
 import Reviews from '../components/Reviews.astro';
 import BookingCTA from '../components/BookingCTA.astro';
+import BookingWidget from '../components/BookingWidget.astro';
 import Footer from '../components/Footer.astro';
 import i18n from '../i18n/index';
 
@@ -22,6 +23,7 @@ const t = i18n.it;
   <Topbar t={t} lang="it" />
   <main>
     <Hero t={t} />
+    <BookingWidget />
     <Intro t={t} />
     <Amenities t={t} />
     <Apartments t={t} />
