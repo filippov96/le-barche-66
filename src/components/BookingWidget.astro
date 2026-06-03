@@ -13,8 +13,6 @@
     max-width: var(--maxw);
     margin-left: auto;
     margin-right: auto;
-    /* shift up into hero */
-    transform: translateY(0);
   }
 
   .booking-widget-inner {
@@ -22,32 +20,6 @@
     border-radius: var(--r-lg);
     box-shadow: var(--shadow-lg);
     overflow: hidden;
-  }
-
-  /* ── KrossBooking accent overrides ── */
-  .booking-widget-inner :global(.kross-btn),
-  .booking-widget-inner :global([class*="kross-btn"]),
-  .booking-widget-inner :global(button[type="submit"]),
-  .booking-widget-inner :global(.btn-primary),
-  .booking-widget-inner :global([class*="primary"]) {
-    background-color: var(--terracotta) !important;
-    border-color: var(--terracotta) !important;
-  }
-  .booking-widget-inner :global(.kross-btn:hover),
-  .booking-widget-inner :global(button[type="submit"]:hover) {
-    background-color: var(--terracotta-deep) !important;
-    border-color: var(--terracotta-deep) !important;
-  }
-  .booking-widget-inner :global(a),
-  .booking-widget-inner :global([class*="accent"]),
-  .booking-widget-inner :global([class*="link"]) {
-    color: var(--terracotta) !important;
-  }
-  /* input focus ring */
-  .booking-widget-inner :global(input:focus),
-  .booking-widget-inner :global(select:focus) {
-    border-color: var(--terracotta) !important;
-    outline-color: var(--terracotta) !important;
   }
 
   /* ── Mobile: no overlap, full width ── */
@@ -61,5 +33,112 @@
       border-radius: 0;
       box-shadow: var(--shadow-md);
     }
+  }
+</style>
+
+<!-- Global overrides for KrossBooking (jQuery-injected, no scoped attributes) -->
+<style is:global>
+  /* ── Submit button — terracotta + rounded ── */
+  #booking-widget .kb-btn-submit,
+  #booking-widget button[type="submit"].kb-btn {
+    background-color: var(--terracotta) !important;
+    border-color: var(--terracotta) !important;
+    color: var(--paper) !important;
+    border-radius: var(--r-md) !important;
+    transition: background-color 180ms ease;
+  }
+  #booking-widget .kb-btn-submit:hover,
+  #booking-widget button[type="submit"].kb-btn:hover {
+    background-color: var(--terracotta-deep) !important;
+    border-color: var(--terracotta-deep) !important;
+  }
+
+  /* ── Date display numbers / dashes ── */
+  #booking-widget .kb-d,
+  #booking-widget .kb-qt {
+    color: var(--terracotta) !important;
+  }
+
+  /* ── Underline indicator under date inputs ── */
+  #booking-widget .kb-form-group.kb-date::before,
+  #booking-widget .kb-form-group.kb-date::after,
+  #booking-widget .kb-d1::after,
+  #booking-widget .kb-d2::after,
+  #booking-widget .kb-d1::before,
+  #booking-widget .kb-d2::before {
+    background-color: var(--terracotta) !important;
+    border-color: var(--terracotta) !important;
+  }
+
+  /* ── Calendar popup ── */
+  #booking-widget .kb-calendar,
+  #booking-widget [class*="calendar"],
+  #booking-widget .kb-mmmm,
+  #booking-widget .kb-ddd {
+    color: var(--terracotta) !important;
+  }
+
+  /* Selected day cells in calendar */
+  #booking-widget td.selected,
+  #booking-widget td.kb-selected,
+  #booking-widget td.range,
+  #booking-widget td.in-range,
+  #booking-widget td.kb-range,
+  #booking-widget td.start,
+  #booking-widget td.end,
+  #booking-widget td.kb-start,
+  #booking-widget td.kb-end,
+  #booking-widget td[class*="selected"],
+  #booking-widget td[class*="range"],
+  #booking-widget .ui-state-active,
+  #booking-widget .ui-state-highlight {
+    background-color: var(--terracotta) !important;
+    color: var(--paper) !important;
+    border-color: var(--terracotta) !important;
+  }
+  #booking-widget td.in-range:not(.start):not(.end),
+  #booking-widget td.kb-range:not(.kb-start):not(.kb-end) {
+    background-color: rgba(184, 107, 74, 0.18) !important;
+    color: var(--terracotta-deep) !important;
+  }
+
+  /* Month label header (GIU 2026 style) — border boxes */
+  #booking-widget .kb-month-label,
+  #booking-widget [class*="month"],
+  #booking-widget thead th,
+  #booking-widget caption {
+    color: var(--terracotta) !important;
+    border-color: var(--terracotta) !important;
+  }
+
+  /* Bordered month/nav button */
+  #booking-widget .kb-calendar-nav,
+  #booking-widget [class*="nav"] button,
+  #booking-widget button[class*="prev"],
+  #booking-widget button[class*="next"] {
+    color: var(--terracotta) !important;
+    border-color: var(--terracotta) !important;
+  }
+
+  /* Any leftover red/orange brand colors → terracotta */
+  #booking-widget [style*="color: rgb(232"],
+  #booking-widget [style*="color:#e"],
+  #booking-widget [style*="background-color: rgb(232"],
+  #booking-widget [style*="background-color:#e"] {
+    color: var(--terracotta) !important;
+    background-color: var(--terracotta) !important;
+  }
+
+  /* Links + accents */
+  #booking-widget a,
+  #booking-widget .kb-link,
+  #booking-widget [class*="accent"] {
+    color: var(--terracotta) !important;
+  }
+  #booking-widget input:focus,
+  #booking-widget select:focus,
+  #booking-widget button:focus-visible {
+    border-color: var(--terracotta) !important;
+    outline-color: var(--terracotta) !important;
   }
 </style>
