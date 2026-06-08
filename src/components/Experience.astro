@@ -11,8 +11,23 @@ const EXP_PHOTOS: Record<string, string> = {
   dolomiti: "https://images.unsplash.com/photo-1557064349-7b3817527fb8?w=840&q=80&auto=format&fit=crop",
   prosecco: "https://images.unsplash.com/photo-1502285254372-2cb4d1b0993b?w=840&q=80&auto=format&fit=crop",
 };
-const kinds = ["venezia","burano","verona","padova","dolomiti","prosecco"];
+const kinds = ["venezia","burano","verona","padova","dolomiti","prosecco"] as const;
 const modes = ["Bus / Treno","Bus + vaporetto","Treno","Treno","Auto","Auto"];
+
+const ORIGIN = "Le Barche 66, Piazza XXVII Ottobre 66, 30172 Mestre VE, Italy";
+const MAP_DESTINATIONS: Record<(typeof kinds)[number], string> = {
+  venezia: "Piazza San Marco, Venezia, Italy",
+  burano: "Burano, Venezia, Italy",
+  verona: "Arena di Verona, Verona, Italy",
+  padova: "Cappella degli Scrovegni, Padova, Italy",
+  dolomiti: "Dolomiti, Cortina d'Ampezzo, Italy",
+  prosecco: "Colline del Prosecco, Valdobbiadene, Italy",
+};
+
+function directionsUrl(destination: string) {
+  const params = new URLSearchParams({ api: "1", origin: ORIGIN, destination });
+  return `https://www.google.com/maps/dir/?${params.toString()}`;
+}
 ---
 <section class="section experience-section" id="experience" data-screen-label="06 Experience">
   <div class="wrap">
@@ -22,17 +37,27 @@ const modes = ["Bus / Treno","Bus + vaporetto","Treno","Treno","Auto","Auto"];
       <p class="lede" style="margin-top:24px;max-width:540px">{t.experience.sub}</p>
     </div>
     <div class="exp-grid">
-      {t.experience.cards.map(([name, desc, distance], i) => (
-        <article class={`exp-card exp-card-${kinds[i]}`}>
-          <img src={EXP_PHOTOS[kinds[i]]} alt={name} loading="lazy" class="exp-card-img" />
-          <div class="exp-card-overlay"></div>
-          <div class="exp-card-content">
-            <p class="exp-card-meta">{distance} · {modes[i]}</p>
-            <h3 class="exp-card-title">{name}</h3>
-            <p class="exp-card-desc">{desc}</p>
-          </div>
-        </article>
-      ))}
+      {t.experience.cards.map(([name, desc, distance], i) => {
+        const kind = kinds[i];
+        const mapsUrl = directionsUrl(MAP_DESTINATIONS[kind]);
+        return (
+          <a
+            href={mapsUrl}
+            class={`exp-card exp-card-${kind}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`${name}: indicazioni da Le Barche 66`}
+          >
+            <img src={EXP_PHOTOS[kind]} alt="" loading="lazy" class="exp-card-img" />
+            <div class="exp-card-overlay"></div>
+            <div class="exp-card-content">
+              <p class="exp-card-meta">{distance} · {modes[i]}</p>
+              <h3 class="exp-card-title">{name}</h3>
+              <p class="exp-card-desc">{desc}</p>
+            </div>
+          </a>
+        );
+      })}
     </div>
   </div>
 </section>

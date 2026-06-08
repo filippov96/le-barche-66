@@ -5,11 +5,11 @@ interface Props { t: T; }
 const { t } = Astro.props;
 const BASE = import.meta.env.BASE_URL.replace(/\/$/, '');
 const APT_PHOTOS = [
-  { avif: `${BASE}/photos/apt-3-4.avif`,  jpg: `${BASE}/photos/apt-3-4.jpg`  },
+  { jpg: `${BASE}/photos/apt-3-main.png` },
   { avif: `${BASE}/photos/apt-3a-2.avif`, jpg: `${BASE}/photos/apt-3a-2.jpg` },
   { avif: `${BASE}/photos/apt-3b-2.avif`, jpg: `${BASE}/photos/apt-3b-2.jpg` },
   { avif: `${BASE}/photos/apt-3c-2.avif`, jpg: `${BASE}/photos/apt-3c-2.jpg` },
-  { avif: `${BASE}/photos/apt-3c-2.avif`, jpg: `${BASE}/photos/apt-3c-2.jpg` },
+  { jpg: `${BASE}/photos/apt-3d-main.png` },
 ];
 ---
 <section class="section" id="apartments" data-screen-label="04 Apartments">
@@ -23,7 +23,7 @@ const APT_PHOTOS = [
     </div>
     <div class="apt-list">
       {t.apartments.list.map(([num, name, desc, capacity, size], i) => (
-        <div class="apt-row" data-index={i}>
+        <div class="apt-row" data-index={i} data-anchor-target="#top" role="link" tabindex="0" aria-label={`Apt ${num}`}>
           <div class="apt-num">{num}</div>
           <div class="apt-name-block">
             <div class="apt-num-label">Apt {num}</div>
@@ -32,18 +32,18 @@ const APT_PHOTOS = [
           <div class="apt-desc">{desc}</div>
           <div class="apt-meta apt-meta-1"><Icon name="users" size={14}/><span><strong>{capacity}</strong></span></div>
           <div class="apt-meta apt-meta-2"><Icon name="ruler" size={14}/><span><strong>{size}</strong></span></div>
-          <a href="#booking" class="apt-cta"><Icon name="arrow-up-right" size={16}/></a>
+          <a href="#top" class="apt-cta"><Icon name="arrow-up-right" size={16}/></a>
           <!-- Mobile photo -->
           <div class="apt-photo-wrap">
             <picture>
-              <source srcset={APT_PHOTOS[i].avif} type="image/avif" />
+              {APT_PHOTOS[i].avif && <source srcset={APT_PHOTOS[i].avif} type="image/avif" />}
               <img src={APT_PHOTOS[i].jpg} alt={name} class="apt-photo-img" loading="lazy" decoding="async" />
             </picture>
             <div class="apt-photo-bar">
               <span class="apt-tag">
                 <Icon name="users" size={13}/>{capacity}<span class="apt-tag-sep">·</span><Icon name="ruler" size={13}/>{size}
               </span>
-              <a href="#booking" class="btn btn-primary apt-book-btn">{t.nav.book}</a>
+              <a href="#top" class="btn btn-primary apt-book-btn">Torna su</a>
             </div>
           </div>
         </div>
@@ -87,6 +87,22 @@ const APT_PHOTOS = [
     });
     row.addEventListener('mouseleave', () => {
       preview?.classList.remove('visible');
+    });
+  });
+
+  photos?.forEach((row) => {
+    const target = row.getAttribute('data-anchor-target') || '#top';
+    const goToTarget = () => {
+      window.location.hash = target;
+    };
+    row.addEventListener('click', (event) => {
+      if ((event.target as HTMLElement).closest('a')) return;
+      goToTarget();
+    });
+    row.addEventListener('keydown', (event) => {
+      if (event.key !== 'Enter' && event.key !== ' ') return;
+      event.preventDefault();
+      goToTarget();
     });
   });
 </script>
