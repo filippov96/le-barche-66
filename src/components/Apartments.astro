@@ -6,11 +6,11 @@ interface Props { t: T; }
 const { t } = Astro.props;
 const BASE = import.meta.env.BASE_URL.replace(/\/$/, '');
 const APT_PHOTOS = [
-  { jpg: `${BASE}/photos/apt-3-main.png` },
-  { avif: `${BASE}/photos/apt-3a-2.avif`, jpg: `${BASE}/photos/apt-3a-2.jpg` },
-  { avif: `${BASE}/photos/apt-3b-2.avif`, jpg: `${BASE}/photos/apt-3b-2.jpg` },
-  { avif: `${BASE}/photos/apt-3c-2.avif`, jpg: `${BASE}/photos/apt-3c-2.jpg` },
-  { jpg: `${BASE}/photos/apt-3d-main.png` },
+  { avif: `${BASE}/photos/apt-3-main.avif`,  jpg: `${BASE}/photos/apt-3-main.jpg`  },
+  { avif: `${BASE}/photos/apt-3a-2.avif`,    jpg: `${BASE}/photos/apt-3a-2.jpg`    },
+  { avif: `${BASE}/photos/apt-3b-2.avif`,    jpg: `${BASE}/photos/apt-3b-2.jpg`    },
+  { avif: `${BASE}/photos/apt-3c-2.avif`,    jpg: `${BASE}/photos/apt-3c-2.jpg`    },
+  { avif: `${BASE}/photos/apt-3d-main.avif`, jpg: `${BASE}/photos/apt-3d-main.jpg` },
 ];
 // Plans: 2A→3, 2B→3A, 2C→3B, 2D→3C, 2E→3D
 const APT_PLANS = [
