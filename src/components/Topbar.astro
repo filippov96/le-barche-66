@@ -1,6 +1,7 @@
 ---
 import type { T } from '../i18n/index';
 import type { Locale } from '../i18n/index';
+import { BOOKING_URL } from '../i18n/index';
 
 interface Props { t: T; lang: Locale; }
 const { t, lang } = Astro.props;
@@ -27,7 +28,7 @@ const langUrls: Record<Locale, string> = {
         <button class={lang === L ? 'active' : ''} onclick={`window.location.href='${langUrls[L]}'`} role="tab">{L.toUpperCase()}</button>
       ))}
     </div>
-    <a href="#booking" class="btn btn-primary">{t.nav.book}</a>
+    <a href={BOOKING_URL} target="_blank" rel="noopener" class="btn btn-primary">{t.nav.book}</a>
   </div>
 </header>
 

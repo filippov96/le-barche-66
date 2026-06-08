@@ -1,5 +1,7 @@
 export type Locale = 'it' | 'en' | 'de';
 
+export const BOOKING_URL = 'https://lebarche.kross.travel/book/step1?adults=2&children=0&rooms=1&guests=2&n_guests=2&guests_rooms=2,0;&kross_lang=it&from=&to=&';
+
 const i18n = {
   it: {
     nav: { apartments: "Appartamenti", location: "Dove siamo", experience: "L'esperienza", reviews: "Recensioni", book: "Prenota" },
@@ -20,6 +22,12 @@ const i18n = {
     },
     apartments: {
       eyebrow: "Cinque appartamenti", title: "Scegli il tuo spazio.", sub: "Ogni appartamento ha camera, soggiorno con divano letto, angolo cottura e bagno privato. Tutti tra 48 e 60 m².",
+      view_plan: "Vedi pianta",
+      plan_alt: "Pianta dell'appartamento",
+      close: "Chiudi",
+      cta_title: "Pronto a prenotare?",
+      cta_sub: "Verifica disponibilità e prenota direttamente.",
+      cta_button: "Prenota ora",
       list: [
         ["3",  "Comfort Suite",       "Camera, soggiorno con divano letto, angolo cottura e bagno.", "fino a 3 ospiti", "48 m²"],
         ["3A", "Family Studio Plus",  "Camera, soggiorno con divano letto, angolo cottura e bagno.", "fino a 4 ospiti", "60 m²"],
@@ -53,6 +61,12 @@ const i18n = {
     },
     apartments: {
       eyebrow: "Five apartments", title: "Choose your space.", sub: "Each apartment has a bedroom, living area with sofa bed, kitchenette and private bathroom. All between 48 and 60 m².",
+      view_plan: "View floor plan",
+      plan_alt: "Apartment floor plan",
+      close: "Close",
+      cta_title: "Ready to book?",
+      cta_sub: "Check availability and book directly.",
+      cta_button: "Book now",
       list: [
         ["3","Comfort Suite","Bedroom, living room with sofa bed, kitchenette and bathroom.","up to 3 guests","48 m²"],
         ["3A","Family Studio Plus","Bedroom, living room with sofa bed, kitchenette and bathroom.","up to 4 guests","60 m²"],
@@ -86,6 +100,12 @@ const i18n = {
     },
     apartments: {
       eyebrow: "Fünf Apartments", title: "Wählen Sie Ihren Raum.", sub: "Jedes Apartment hat ein Schlafzimmer, Wohnzimmer mit Schlafsofa, Küchenzeile und privates Bad. Alle zwischen 48 und 60 m².",
+      view_plan: "Grundriss ansehen",
+      plan_alt: "Grundriss der Wohnung",
+      close: "Schließen",
+      cta_title: "Bereit zu buchen?",
+      cta_sub: "Verfügbarkeit prüfen und direkt buchen.",
+      cta_button: "Jetzt buchen",
       list: [
         ["3","Comfort Suite","Schlafzimmer, Wohnzimmer mit Schlafsofa, Küchenzeile und Bad.","bis zu 3 Gäste","48 m²"],
         ["3A","Family Studio Plus","Schlafzimmer, Wohnzimmer mit Schlafsofa, Küchenzeile und Bad.","bis zu 4 Gäste","60 m²"],
